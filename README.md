@@ -1,6 +1,6 @@
 # startup-backend
 
-1. recomended use node 16.13.2
+1. recomended use node 14.18
 2. install yarn
 3. run yarn
 4. yarn build

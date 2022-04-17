@@ -1,15 +1,21 @@
 // external dependencies
+const bcrypt = require("bcrypt");
 const cors = require("cors");
 const express = require("express");
 const path = require("path");
 const swaggerJSDoc = require("swagger-jsdoc");
 const SwaggerUiExpress = require("swagger-ui-express");
-const { version } = require("../package.json");
+const Sequlieze = require("sequelize");
+const lodash = require("lodash");
+const dotenv = require("dotenv").config();
+const dayjs = require("dayjs");
 
 // internal dependencies
 const routerFcomposer = require("./router");
 const handlerFcomposerHash = require("./handler");
-
+const { version } = require("../package.json");
+const connectionDB = require("./config/sequelize");
+const modelComposerHash = require("./model");
 // app registration
 // const env = {
 //   APP_ENV: process.env.APP_ENV,
@@ -18,11 +24,17 @@ const handlerFcomposerHash = require("./handler");
 const app = express();
 
 const diHash = {
+  bcrypt,
+  connectionDB,
+  dayjs,
+  DataTypes: Sequlieze.DataTypes,
+  dotenv,
   express,
   handlerFcomposerHash,
+  lodash,
+  model: modelComposerHash,
 };
-const router = routerFcomposer(diHash);
-app.use("/v1", router);
+
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(cors());
 app.use(express.json());
@@ -71,5 +83,8 @@ app.get("/docs.json", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerJsdocOptions);
 });
+
+const router = routerFcomposer(diHash);
+app.use("/v1", router);
 
 module.exports = app;
