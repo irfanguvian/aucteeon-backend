@@ -1,16 +1,16 @@
-function getProductHandlerComposer(diHash) {
+function getHistoryHandlerComposer(diHash) {
   const {
     model,
   } = diHash;
 
   const {
-    Products,
+    History,
   } = model;
-  async function getProductHandler(req, res) {
+  async function getHistoryHandler(req, res) {
     try {
       const params = req.params;
 
-      const Product = await Products.findOne({
+      const getHistory = await History.findOne({
         where: {
           id: params.id,
         },
@@ -18,7 +18,7 @@ function getProductHandlerComposer(diHash) {
 
       return res.status(200).json({
         "success": true,
-        "data": Product,
+        "data": getHistory,
       });
     } catch (error) {
       console.log(error);
@@ -28,8 +28,8 @@ function getProductHandlerComposer(diHash) {
       });
     }
   }
-  return getProductHandler;
+  return getHistoryHandler;
 }
 
-module.exports = getProductHandlerComposer;
+module.exports = getHistoryHandlerComposer;
 

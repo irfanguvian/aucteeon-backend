@@ -9,6 +9,7 @@ const Sequlieze = require("sequelize");
 const lodash = require("lodash");
 const dotenv = require("dotenv").config();
 const dayjs = require("dayjs");
+const fs = require("fs");
 
 // internal dependencies
 const routerFcomposer = require("./router");
@@ -16,6 +17,7 @@ const handlerFcomposerHash = require("./handler");
 const { version } = require("../package.json");
 const connectionDB = require("./config/sequelize");
 const modelComposerHash = require("./model");
+const imageUpload = require("./utils/imageUploads");
 // app registration
 // const env = {
 //   APP_ENV: process.env.APP_ENV,
@@ -32,6 +34,8 @@ const diHash = {
   express,
   handlerFcomposerHash,
   lodash,
+  fs,
+  imageUpload,
   model: modelComposerHash,
 };
 

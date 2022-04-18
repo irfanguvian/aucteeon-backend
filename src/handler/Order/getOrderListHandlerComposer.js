@@ -1,12 +1,12 @@
-function getListProductHandlerComposer(diHash) {
+function getHistoryListHandlerComposer(diHash) {
   const {
     model,
   } = diHash;
 
   const {
-    Products,
+    Order,
   } = model;
-  async function getListProductHandler(req, res) {
+  async function getHistoryListHandler(req, res) {
     try {
       const query = req.query;
       let limit = 0;
@@ -31,37 +31,37 @@ function getListProductHandlerComposer(diHash) {
 
       offset = (pages - 1) * limit;
       // check log TODO
-      const ProductsList = await Products.findAndCountAll({
+      const OrderList = await Order.findAndCountAll({
         order: [["id", "DESC"]],
         limit,
         offset,
       });
 
-      const fromMeta = ProductsList.length > 0 ? offset + 1 : 0;
-      const toMeta = ProductsList.length > 0 ? offset + 1 + ProductsList.length : 0;
-      const totalMeta = await Products.count();
+      const fromMeta = OrderList.rows.length > 0 ? offset + 1 : 0;
+      const toMeta = OrderList.rows.length > 0 ? offset + OrderList.rows.length : 0;
 
       return res.status(200).json({
         "success": true,
         "meta": {
-          "total": totalMeta,
+          "total": OrderList.count,
           "from": fromMeta,
           "to": toMeta,
           "page": query.page ? query.page : 1,
         },
         "data": {
-          rows: ProductsList,
+          rows: OrderList.rows,
         },
       });
     } catch (error) {
       console.log(error);
       return res.status(500).json({
+        "success": false,
         "message": error.message,
       });
     }
   }
-  return getListProductHandler;
+  return getHistoryListHandler;
 }
 
-module.exports = getListProductHandlerComposer;
+module.exports = getHistoryListHandlerComposer;
 
