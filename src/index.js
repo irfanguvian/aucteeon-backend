@@ -1,15 +1,27 @@
 require("dotenv").config();
-const appServer = require("./server");
+const { app, diHash } = require("./server");
 const http = require("http");
+const socketHandler = require("./socket");
 
-const server = http.createServer(appServer);
-const { Server } = require("socket.io");
+const server = http.createServer(app);
 
-const io = new Server(server);
-
-io.on("connection", (socket) => {
-  console.log("a user connected");
+const io = require("socket.io")(server, {
+  cors: {
+    origin: (origin, cb) => {
+      cb(null, true);
+    },
+    methods: ["GET", "POST"],
+    transports: ["websocket"],
+    credentials: true,
+  },
+  allowEIO3: true,
 });
+
+diHash.io = io;
+socketHandler(diHash);
+// io.on("connection", (socket) => {
+//   console.log("a user connected");
+// });
 
 process.env.APP_VERSION = require("../package.json").version;
 
@@ -19,7 +31,7 @@ process.once("uncaughtException", (err) => {
   console.error(err);
 });
 
-appServer.listen(appPort, function startApp() {
+server.listen(appPort, function startApp() {
   console.log(`APP_ENV ${process.env.APP_ENV}`);
   console.log(`v${process.env.APP_VERSION}`);
 });

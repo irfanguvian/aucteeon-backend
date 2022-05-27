@@ -91,4 +91,7 @@ app.get("/docs.json", (req, res) => {
 const router = routerFcomposer(diHash);
 app.use("/v1", router);
 
-module.exports = app;
+module.exports = {
+  app,
+  diHash,
+};

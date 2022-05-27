@@ -16,6 +16,8 @@ const products = connectionDB.define(
     buyNowValue: { field: "buy_now_value", type: DataTypes.INTEGER },
     productOwner: { field: "product_owner", type: DataTypes.INTEGER },
     status: { field: "status", type: DataTypes.STRING },
+    dateStarted: { field: "date_started", type: DataTypes.STRING },
+    dateEnd: { field: "date_end", type: DataTypes.STRING },
 
   },
   { tableName: "products", timestamps: false },
