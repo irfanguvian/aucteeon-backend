@@ -9,9 +9,7 @@ const history = connectionDB.define(
     },
     productId: { field: "product_id", type: DataTypes.INTEGER },
     userId: { field: "user_id", type: DataTypes.INTEGER },
-    status: { field: "username", type: DataTypes.STRING },
-    isDeleted: { field: "is_deleted", type: DataTypes.BOOLEAN },
-
+    status: { field: "status", type: DataTypes.STRING },
   },
   { tableName: "history", timestamps: false },
 );

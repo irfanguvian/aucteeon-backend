@@ -2,7 +2,7 @@ const UserModel = require("./User");
 const UserDetail = require("./UserDetails");
 const History = require("./History");
 const Products = require("./Products");
-const Bid = require("./bid");
+const ProductBid = require("./productBid");
 const Categories = require("./categories");
 const Order = require("./order");
 
@@ -11,7 +11,7 @@ const ModelComposerHash = {
   UserDetail,
   History,
   Products,
-  BidTable: Bid,
+  ProductBid,
   Category: Categories,
   Order,
 };

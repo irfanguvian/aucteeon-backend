@@ -36,6 +36,7 @@ const diHash = {
   lodash,
   fs,
   imageUpload,
+  Sequlieze,
   model: modelComposerHash,
 };
 

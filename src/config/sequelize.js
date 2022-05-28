@@ -23,6 +23,7 @@ const connectionDB = new Sequelize(db.database, db.username, db.password, {
   database: db.database,
   timezone: db.timezone,
   logging: false,
+  acquire: 60000,
 });
 
 module.exports = connectionDB;
