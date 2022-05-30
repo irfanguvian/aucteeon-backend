@@ -7,9 +7,8 @@ const categories = connectionDB.define(
     id: {
       field: "id", type: DataTypes.BIGINT, allowNull: false, primaryKey: true, autoIncrement: true,
     },
-    image: { field: "image", type: DataTypes.INTEGER },
-    name: { field: "name", type: DataTypes.INTEGER },
-
+    image: { field: "image", type: DataTypes.STRING },
+    name: { field: "name", type: DataTypes.STRING },
   },
   { tableName: "category", timestamps: false },
 );

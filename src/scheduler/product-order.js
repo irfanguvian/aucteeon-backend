@@ -1,4 +1,5 @@
 const schedule = require("node-schedule");
+const cryptos = require("crypto");
 
 async function ExpiredProductHandlerComposer(diHash) {
   const {
@@ -77,9 +78,18 @@ async function ExpiredProductHandlerComposer(diHash) {
             });
 
             if (!lodash.isNil(getWinnerBidValue)) {
+              let orderNumber = ``;
+              for (let i = 0; i < 3; i += 1) {
+                const generateCode = cryptos.randomBytes(2).toString("hex");
+                if (i === 2) {
+                  orderNumber += `${generateCode}`;
+                } else {
+                  orderNumber += `${generateCode}-`;
+                }
+              }
               const createOrderArgs = {
                 productId: product.id,
-                orderNumber: "xxxx-xxxx-xxxx",
+                orderNumber: orderNumber,
                 userId: userWinnerId,
                 priceBid: getWinnerBidValue.bidValue,
                 imageProof: [],

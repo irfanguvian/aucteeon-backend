@@ -89,6 +89,10 @@ app.get("/docs.json", (req, res) => {
   res.send(swaggerJsdocOptions);
 });
 
+app.get("/assets/img/:filename", async (req, res) => {
+  res.sendFile(`${__dirname}/public/image/${req.params.filename}`);
+});
+
 const router = routerFcomposer(diHash);
 app.use("/v1", router);
 

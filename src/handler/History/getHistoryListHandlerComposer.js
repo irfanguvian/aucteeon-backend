@@ -30,7 +30,6 @@ function getHistoryListHandlerComposer(diHash) {
       }
 
       offset = (pages - 1) * limit;
-      // check log TODO
       const HistoryList = await History.findAndCountAll({
         order: [["id", "DESC"]],
         limit,
