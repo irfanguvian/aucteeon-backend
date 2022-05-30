@@ -1,10 +1,10 @@
-const UserModel = require("./user");
-const UserDetail = require("./userDetails");
-const History = require("./history");
-const Products = require("./products");
-const ProductBid = require("./productBid");
-const Categories = require("./categories");
-const Order = require("./order");
+const UserModel = require("./users.js");
+const UserDetail = require("./userDetail.js");
+const History = require("./history.js");
+const Products = require("./products.js");
+const ProductBid = require("./productBid.js");
+const Categories = require("./categories.js");
+const Order = require("./order.js");
 
 const ModelComposerHash = {
   User: UserModel,
