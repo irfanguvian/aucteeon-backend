@@ -32,7 +32,7 @@ process.once("uncaughtException", (err) => {
   console.error(err);
 });
 
-server.listen(appPort, function startApp() {
+server.listen(appPort, "0.0.0.0", function startApp() {
   console.log(`APP_ENV ${process.env.APP_ENV}`);
   console.log(`v${process.env.APP_VERSION}`);
   productOrder.start(diHash);
