@@ -13,6 +13,12 @@ const db = {
   port: lodash.defaultTo(Number(process.env.DB_PORT), 5432),
   timezone: lodash.defaultTo(process.env.DB_TIMEZONE, "+07:00"),
   logging: false,
+  dialectOptions: {
+    ssl: {
+      require: process.env.SSL,
+      rejectUnauthorized: process.env.SSL_REJECT, // <<<<<<< YOU NEED THIS
+    },
+  },
 };
 
 const connectionDB = new Sequelize(db.database, db.username, db.password, {
