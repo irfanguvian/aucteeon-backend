@@ -1,8 +1,8 @@
 require("dotenv").config();
 const { app, diHash } = require("./server");
 const http = require("http");
-// const socketHandler = require("./socket");
-// const productOrder = require("./scheduler/product-order");
+const socketHandler = require("./socket");
+const productOrder = require("./scheduler/product-order");
 
 const server = http.createServer(app);
 
@@ -19,7 +19,7 @@ const io = require("socket.io")(server, {
 });
 
 diHash.io = io;
-// socketHandler(diHash);
+socketHandler(diHash);
 // io.on("connection", (socket) => {
 //   console.log("a user connected");
 // });
@@ -35,6 +35,6 @@ process.once("uncaughtException", (err) => {
 server.listen(appPort, "0.0.0.0", function startApp() {
   console.log(`APP_ENV ${process.env.APP_ENV}`);
   console.log(`v${process.env.APP_VERSION}`);
-  // productOrder.start(diHash);
+  productOrder.start(diHash);
 });
 
