@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { app, diHash } = require("./server");
 const http = require("http");
-const socketHandler = require("./socket");
+// const socketHandler = require("./socket");
 // const productOrder = require("./scheduler/product-order");
 
 const server = http.createServer(app);
@@ -19,7 +19,7 @@ const io = require("socket.io")(server, {
 });
 
 diHash.io = io;
-socketHandler(diHash);
+// socketHandler(diHash);
 // io.on("connection", (socket) => {
 //   console.log("a user connected");
 // });
