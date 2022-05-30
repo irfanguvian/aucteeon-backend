@@ -15,8 +15,8 @@ const db = {
   logging: false,
   dialectOptions: {
     ssl: {
-      require: process.env.SSL,
-      rejectUnauthorized: process.env.SSL_REJECT, // <<<<<<< YOU NEED THIS
+      require: true,
+      rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
     },
   },
 };
