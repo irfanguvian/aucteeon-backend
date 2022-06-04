@@ -5,6 +5,7 @@ function postUserHandlerComposer(diHash) {
     lodash,
     dotenv,
     dayjs,
+    jwt,
   } = diHash;
 
   const {
@@ -13,8 +14,6 @@ function postUserHandlerComposer(diHash) {
   async function postUserHandler(req, res) {
     try {
       const body = req.body;
-      const passwordSalt = await bcrypt.genSaltSync(+dotenv.APP_SALT);
-      const passwordHash = await bcrypt.hashSync(body.password, passwordSalt);
       const checkIfEmailExist = await User.findOne({
         where: {
           email: body.email,
@@ -28,6 +27,9 @@ function postUserHandlerComposer(diHash) {
         });
       }
 
+      const passwordSalt = await bcrypt.genSaltSync(+dotenv.APP_SALT);
+      const passwordHash = await bcrypt.hashSync(body.password, passwordSalt);
+
       const insertArgs = {
         username: body.username,
         password: passwordHash,
@@ -38,17 +40,30 @@ function postUserHandlerComposer(diHash) {
       };
 
       const getUser = await User.create(insertArgs);
+      if (getUser) {
+        const token = jwt.sign(getUser.dataValues, process.env.JWT_SECRET, {
+          expiresIn: "30d",
+        });
 
-      return res.status(200).json({
-        "success": true,
-        "data": {
-          user: getUser.dataValues,
-        },
-      });
+        return res.status(200).json({
+          success: true,
+          message: "Success",
+          data: {
+            user: getUser.dataValues,
+            token: token,
+          },
+        });
+      } else {
+        return res.status(400).json({
+          status: false,
+          message: "invalid user data",
+          data: {},
+        });
+      }
     } catch (error) {
       console.log(error);
       return res.status(500).json({
-        "message": error.message,
+        message: error.message,
       });
     }
   }

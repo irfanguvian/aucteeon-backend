@@ -10,6 +10,7 @@ const lodash = require("lodash");
 const dotenv = require("dotenv").config();
 const dayjs = require("dayjs");
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
 
 // internal dependencies
 const routerFcomposer = require("./router");
@@ -18,6 +19,7 @@ const { version } = require("../package.json");
 const connectionDB = require("./config/sequelize");
 const modelComposerHash = require("./model");
 const imageUpload = require("./utils/imageUploads");
+const middlewareComposerHash = require("./middleware");
 // app registration
 // const env = {
 //   APP_ENV: process.env.APP_ENV,
@@ -33,6 +35,8 @@ const diHash = {
   dotenv,
   express,
   handlerFcomposerHash,
+  middlewareComposerHash,
+  jwt,
   lodash,
   fs,
   imageUpload,

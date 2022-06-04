@@ -22,9 +22,7 @@ function postCategoryHandlerComposer(diHash) {
 
       return res.status(200).json({
         "success": true,
-        "data": {
-          category: category,
-        },
+        "data": category,
       });
     } catch (error) {
       console.log(error);

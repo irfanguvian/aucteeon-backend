@@ -35,14 +35,16 @@ function getCategoryListRouteComposer(diHash) {
   const {
     express,
     handlerFcomposerHash,
+    middlewareComposerHash,
   } = diHash;
 
   const expressRouter = express.Router();
   const handlerFcomposer = handlerFcomposerHash.postCategoryHandler;
+  const authorization = middlewareComposerHash.userAuthorizationHandler;
 
   const routePath = "/category";
   // expressRouter.use(routePath, midlleware);
-  expressRouter.post(routePath, handlerFcomposer(diHash));
+  expressRouter.post(routePath, [authorization(diHash)], handlerFcomposer(diHash));
   return expressRouter;
 }
 

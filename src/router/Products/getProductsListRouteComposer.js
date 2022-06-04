@@ -38,14 +38,16 @@ function getProductsListRouteComposer(diHash) {
   const {
     express,
     handlerFcomposerHash,
+    middlewareComposerHash,
   } = diHash;
 
   const expressRouter = express.Router();
   const handlerFcomposer = handlerFcomposerHash.getProductListHandler;
+  const authorization = middlewareComposerHash.userAuthorizationHandler;
 
   const routePath = "/products";
   // expressRouter.use(routePath, midlleware);
-  expressRouter.get(routePath, handlerFcomposer(diHash));
+  expressRouter.get(routePath, [authorization(diHash)], handlerFcomposer(diHash));
   return expressRouter;
 }
 

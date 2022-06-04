@@ -38,14 +38,15 @@ function getOrderListRouteComposer(diHash) {
   const {
     express,
     handlerFcomposerHash,
+    middlewareComposerHash,
   } = diHash;
 
   const expressRouter = express.Router();
   const handlerFcomposer = handlerFcomposerHash.getOrderListHandler;
-
+  const authorization = middlewareComposerHash.userAuthorizationHandler;
   const routePath = "/order";
   // expressRouter.use(routePath, midlleware);
-  expressRouter.get(routePath, handlerFcomposer(diHash));
+  expressRouter.get(routePath, [authorization(diHash)], handlerFcomposer(diHash));
   return expressRouter;
 }
 

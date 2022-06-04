@@ -1,7 +1,9 @@
-const postUserHandler = require("./postUserHandlerComposer");
+const postUserRegisterHandler = require("./postUserRegisterHandlerComposer");
+const postUserAuthHandler = require("./postUserAuthHandlerFcomposer");
 
 const functionFcomposerHash = {
-  postUserHandler,
+  postUserRegisterHandler,
+  postUserAuthHandler,
 };
 
 module.exports = functionFcomposerHash;

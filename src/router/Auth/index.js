@@ -1,5 +1,6 @@
 
-const postUserAuthRouterComposer = require("./postUserRouteComposer");
+const postUserRegisterRouteComposer = require("./postUserRegisterRouteComposer");
+const postUserAuthRouteComposer = require("./postUserAuthRouterFcomposer");
 
 function exampleRouterFcomposer(diHash) {
   const {
@@ -7,7 +8,8 @@ function exampleRouterFcomposer(diHash) {
   } = diHash;
 
   const expressRouter = express.Router();
-  expressRouter.use(postUserAuthRouterComposer(diHash));
+  expressRouter.use(postUserRegisterRouteComposer(diHash));
+  expressRouter.use(postUserAuthRouteComposer(diHash));
 
   return expressRouter;
 }

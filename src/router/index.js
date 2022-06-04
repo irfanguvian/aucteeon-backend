@@ -15,7 +15,10 @@ const CategoryRouteFcomposer = require("./Category");
  *        name: x-api-key
  *      userAuthScheme:
  *        type: http
+ *        in: header
  *        scheme: bearer
+ *        name: Authorization
+ *        bearerFormat: JWT
  */
 
 function routerFcomposer(diHash) {

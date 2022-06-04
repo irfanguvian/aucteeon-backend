@@ -23,14 +23,16 @@ function getHistoryRouteComposer(diHash) {
   const {
     express,
     handlerFcomposerHash,
+    middlewareComposerHash,
   } = diHash;
 
   const expressRouter = express.Router();
   const handlerFcomposer = handlerFcomposerHash.getHistoryHandler;
+  const authorization = middlewareComposerHash.userAuthorizationHandler;
 
   const routePath = "/history/:id";
   // expressRouter.use(routePath, midlleware);
-  expressRouter.get(routePath, handlerFcomposer(diHash));
+  expressRouter.get(routePath, [authorization(diHash)], handlerFcomposer(diHash));
   return expressRouter;
 }
 

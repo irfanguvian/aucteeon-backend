@@ -1,5 +1,5 @@
 const getCategoryListRouteComposer = require("./getCategoryListRouteComposer");
-const postCategoryListRouteComposer = require("./postCategoryListRouteComposer");
+const postCategoryRouteComposer = require("./postCategoryRouteComposer");
 
 function historyRouterFcomposer(diHash) {
   const {
@@ -7,7 +7,7 @@ function historyRouterFcomposer(diHash) {
   } = diHash;
 
   const expressRouter = express.Router();
-  expressRouter.use(postCategoryListRouteComposer(diHash));
+  expressRouter.use(postCategoryRouteComposer(diHash));
   expressRouter.use(getCategoryListRouteComposer(diHash));
 
   return expressRouter;

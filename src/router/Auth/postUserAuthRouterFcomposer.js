@@ -1,48 +1,43 @@
 /**
  * @openapi
- * /signup:
+ * /login:
  *  post:
- *     description: Create New User
+ *     description: login user
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/postUserAuthPayload'
+ *             $ref: '#/components/schemas/postUserPayload'
  *     responses:
  *       200:
- *         description: Created New User
+ *         description: login user
  *     tags:
  *       - User
  *
  * components:
  *   schemas:
- *     postUserAuthPayload:
+ *     postUserPayload:
  *       type: object
  *       properties:
- *         username:
- *           description: username of user
- *           type: string
  *         email:
  *           description: Email of user
  *           type: string
  *         password:
- *           description: password of user
+ *           description: Password of user
  *           type: string
  *       required:
  *         - username
- *         - email
  *         - password
  */
 function postUserAuthRouterFcomposer(diHash) {
-  const {
-    express,
-    handlerFcomposerHash,
-  } = diHash;
-  const expressRouter = express.Router();
-  const handlerFcomposer = handlerFcomposerHash.postUserHandler;
+  const { express, handlerFcomposerHash } = diHash;
 
-  const routerPath = "/signup";
+  const expressRouter = express.Router();
+  const handlerFcomposer = handlerFcomposerHash.postUserAuthHandler;
+  //   const Authorization = middlewareComposerHash.userAuthorizationHandler;
+
+  const routerPath = "/login";
   // expressRouter.use(routerPath, middlewareHash.standardMiddlewareList);
   expressRouter.post(routerPath, handlerFcomposer(diHash));
 

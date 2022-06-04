@@ -34,13 +34,15 @@ function postProductRouteComposer(diHash) {
   const {
     express,
     handlerFcomposerHash,
+    middlewareComposerHash,
   } = diHash;
   const expressRouter = express.Router();
   const handlerFcomposer = handlerFcomposerHash.postProductHandler;
+  const authorization = middlewareComposerHash.userAuthorizationHandler;
 
   const routerPath = "/products";
   // expressRouter.use(routerPath, middlewareHash.standardMiddlewareList);
-  expressRouter.post(routerPath, handlerFcomposer(diHash));
+  expressRouter.post(routerPath, [authorization(diHash)], handlerFcomposer(diHash));
 
   return expressRouter;
 }
