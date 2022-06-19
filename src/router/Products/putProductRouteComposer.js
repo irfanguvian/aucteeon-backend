@@ -8,7 +8,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/postProductPayload'
+ *             $ref: '#/components/schemas/putProductPayload'
  *     responses:
  *       200:
  *         description: Updated product record.
@@ -17,18 +17,24 @@
  *
  * components:
  *   schemas:
- *     postExamplePayload:
+ *     putProductPayload:
  *       type: object
  *       properties:
- *         username:
- *           description: Username of user
+ *         name:
+ *           description: name of user
  *           type: string
- *         password:
- *           description: Password of user
+ *         desc:
+ *           description: name of user
  *           type: string
- *       required:
- *         - username
- *         - password
+ *         condition:
+ *           description: name of user
+ *           type: string
+ *         initValue:
+ *           description: name of user
+ *           type: string
+ *         buyNowValue:
+ *           description: name of user
+ *           type: string
  */
 function postProductRouteComposer(diHash) {
   const {

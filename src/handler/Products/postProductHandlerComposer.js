@@ -30,7 +30,6 @@ function postProductHandlerComposer(diHash) {
       if (!lodash.isNil(body.condition)) createProductBody.condition = body.condition;
       if (!lodash.isNil(body.initValue)) createProductBody.initValue = body.initValue;
       if (!lodash.isNil(body.buyNowValue)) createProductBody.buyNowValue = body.buyNowValue;
-      if (!lodash.isNil(body.status)) createProductBody.status = body.status;
 
       if (!lodash.isNil(body.images)) {
         const responseImage = await Promise.all(body.images.map(async (image, index) => {

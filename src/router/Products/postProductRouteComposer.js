@@ -17,18 +17,30 @@
  *
  * components:
  *   schemas:
- *     postExamplePayload:
+ *     postProductPayload:
  *       type: object
  *       properties:
- *         username:
- *           description: Username of user
+ *         name:
+ *           description: name of user
  *           type: string
- *         password:
- *           description: Password of user
+ *         desc:
+ *           description: name of user
+ *           type: string
+ *         condition:
+ *           description: name of user
+ *           type: string
+ *         initValue:
+ *           description: name of user
+ *           type: string
+ *         buyNowValue:
+ *           description: name of user
  *           type: string
  *       required:
- *         - username
- *         - password
+ *         - name
+ *         - desc
+ *         - condition
+ *         - initValue
+ *         - buyNowValue
  */
 function postProductRouteComposer(diHash) {
   const {

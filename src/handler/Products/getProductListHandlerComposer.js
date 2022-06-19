@@ -12,9 +12,9 @@ function getProductListHandlerComposer(diHash) {
       let limit = 0;
       let offset = 0;
       let pages = 0;
-      if (typeof query.itemPerPage !== "undefined") {
-        if (query.itemPerPage !== "") {
-          limit = query.itemPerPage;
+      if (typeof query.length !== "undefined") {
+        if (query.length !== "") {
+          limit = query.length;
         }
       }
       if (typeof query.page !== "undefined") {

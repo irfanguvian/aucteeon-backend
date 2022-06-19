@@ -19,14 +19,6 @@
  *         schema:
  *           type: integer
  *           nullable: true
- *       - in: query
- *         name: direction
- *         description: Listing sort direction.
- *         schema:
- *           type: string
- *           enum: [asc, desc]
- *           default: desc
- *           nullable: true
  *     responses:
  *       200:
  *         description: Retrieved list of user records.

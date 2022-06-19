@@ -7,12 +7,18 @@
  *       - appAuthScheme: []
  *     description: Retrieve a History record.
  *     parameters:
- *       - in: path
- *         name: id
- *         description: id of the history to retrieve.
- *         required: true
+ *       - in: query
+ *         name: page
+ *         description: Listing page number.
  *         schema:
  *           type: integer
+ *           nullable: true
+ *       - in: query
+ *         name: length
+ *         description: Listing length.
+ *         schema:
+ *           type: integer
+ *           nullable: true
  *     responses:
  *       200:
  *         description: Retrieved History Record.

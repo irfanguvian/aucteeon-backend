@@ -13,12 +13,12 @@ const db = {
   port: lodash.defaultTo(Number(process.env.DB_PORT), 5432),
   timezone: lodash.defaultTo(process.env.DB_TIMEZONE, "+07:00"),
   logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
-    },
-  },
+  // dialectOptions: {
+  //   ssl: {
+  //     require: lodash.defaultTo(process.env.SSL_REQUIRED, false),
+  //     rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
+  //   },
+  // },
 };
 
 const connectionDB = new Sequelize(db.database, db.username, db.password, {
@@ -30,12 +30,6 @@ const connectionDB = new Sequelize(db.database, db.username, db.password, {
   timezone: db.timezone,
   logging: false,
   acquire: 60000,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
-    },
-  },
 });
 
 module.exports = connectionDB;
