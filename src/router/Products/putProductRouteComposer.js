@@ -35,6 +35,15 @@
  *         buyNowValue:
  *           description: name of user
  *           type: string
+ *         images:
+ *           description: name of user
+ *           type: array
+ *         categoryId:
+ *           description: name of user
+ *           type: string
+ *         indexImageDeleted:
+ *           description: name of user
+ *           type: array
  */
 function postProductRouteComposer(diHash) {
   const {

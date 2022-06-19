@@ -35,12 +35,19 @@
  *         buyNowValue:
  *           description: name of user
  *           type: string
+ *         images:
+ *           description: name of user
+ *           type: array
+ *         categoryId:
+ *           description: name of user
+ *           type: string
  *       required:
  *         - name
  *         - desc
  *         - condition
  *         - initValue
  *         - buyNowValue
+ *         - images
  */
 function postProductRouteComposer(diHash) {
   const {
