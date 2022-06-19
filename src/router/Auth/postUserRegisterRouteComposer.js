@@ -23,12 +23,20 @@
  *         email:
  *           description: Email of user
  *           type: string
+ *         firstname:
+ *           description: firstname of user
+ *           type: string
+ *         lastname:
+ *           description: lastname of user
+ *           type: string
  *         password:
  *           description: password of user
  *           type: string
  *       required:
  *         - email
  *         - password
+ *         - firstname
+ *         - lastname
  */
 function postUserAuthRouterFcomposer(diHash) {
   const {
