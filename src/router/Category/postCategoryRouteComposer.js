@@ -2,6 +2,9 @@
  * @openapi
  * /category:
  *  post:
+ *     security:
+ *       - userAuthScheme: []
+ *       - appAuthScheme: []
  *     description: Creating Category record.
  *     requestBody:
  *       required: true

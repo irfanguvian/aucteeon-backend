@@ -2,6 +2,9 @@
  * @openapi
  * /products/{id}:
  *  put:
+ *     security:
+ *       - userAuthScheme: []
+ *       - appAuthScheme: []
  *     description: Updating Product record.
  *     requestBody:
  *       required: true

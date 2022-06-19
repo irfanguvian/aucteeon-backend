@@ -2,6 +2,9 @@
  * @openapi
  * /products:
  *  post:
+ *     security:
+ *       - userAuthScheme: []
+ *       - appAuthScheme: []
  *     description: Creating Product record.
  *     requestBody:
  *       required: true

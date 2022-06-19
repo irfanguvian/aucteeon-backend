@@ -7,8 +7,8 @@ function historyRouterFcomposer(diHash) {
   } = diHash;
 
   const expressRouter = express.Router();
-  expressRouter.use(postCategoryRouteComposer(diHash));
   expressRouter.use(getCategoryListRouteComposer(diHash));
+  expressRouter.use(postCategoryRouteComposer(diHash));
 
   return expressRouter;
 }
