@@ -7,7 +7,6 @@ const users = connectionDB.define(
     id: {
       field: "id", type: DataTypes.BIGINT, allowNull: false, primaryKey: true, autoIncrement: true,
     },
-    username: { field: "username", type: DataTypes.STRING },
     email: { field: "email", type: DataTypes.STRING },
     password: { field: "password", type: DataTypes.STRING },
     created_at: { field: "created_at", type: DataTypes.STRING },

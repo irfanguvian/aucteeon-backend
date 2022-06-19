@@ -27,7 +27,7 @@
  *           description: Password of user
  *           type: string
  *       required:
- *         - username
+ *         - email
  *         - password
  */
 function postUserAuthRouterFcomposer(diHash) {
