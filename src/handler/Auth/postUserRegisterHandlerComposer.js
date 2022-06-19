@@ -9,7 +9,7 @@ function postUserHandlerComposer(diHash) {
   } = diHash;
 
   const {
-    User,
+    UserDetail, User,
   } = model;
   async function postUserHandler(req, res) {
     try {
@@ -38,8 +38,15 @@ function postUserHandlerComposer(diHash) {
         deleted_at: null,
       };
 
+      const insertDetail = {
+        firstname: body.firstname,
+        lastname: body.lastname,
+        phoneNumber: body.phoneNumber,
+      };
+
       const getUser = await User.create(insertArgs);
-      if (getUser) {
+      const getUserDetail = await UserDetail.create(insertDetail);
+      if (getUser && getUserDetail) {
         const token = jwt.sign(getUser.dataValues, process.env.JWT_SECRET, {
           expiresIn: "30d",
         });

@@ -26,6 +26,9 @@
  *         firstname:
  *           description: firstname of user
  *           type: string
+ *         phoneNumber:
+ *           description: phoneNumber of user
+ *           type: string
  *         lastname:
  *           description: lastname of user
  *           type: string
@@ -37,6 +40,7 @@
  *         - password
  *         - firstname
  *         - lastname
+ *         - phoneNumber
  */
 function postUserAuthRouterFcomposer(diHash) {
   const {
