@@ -20,9 +20,6 @@
  *     postUserRegisterPayload:
  *       type: object
  *       properties:
- *         username:
- *           description: username of user
- *           type: string
  *         email:
  *           description: Email of user
  *           type: string
@@ -30,7 +27,6 @@
  *           description: password of user
  *           type: string
  *       required:
- *         - username
  *         - email
  *         - password
  */

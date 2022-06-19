@@ -31,7 +31,6 @@ function postUserHandlerComposer(diHash) {
       const passwordHash = await bcrypt.hashSync(body.password, passwordSalt);
 
       const insertArgs = {
-        username: body.username,
         password: passwordHash,
         email: body.email,
         created_at: dayjs().format("YYYY-MM-DD HH:mm:ss"),
