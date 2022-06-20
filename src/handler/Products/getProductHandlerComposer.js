@@ -6,7 +6,7 @@ function getProductHandlerComposer(diHash) {
   const {
     Products,
     Category,
-    User,
+    UserDetail,
   } = model;
   async function getProductHandler(req, res) {
     try {
@@ -16,7 +16,7 @@ function getProductHandlerComposer(diHash) {
         where: {
           id: params.id,
         },
-        include: [{ model: Category }, { model: User }],
+        include: [{ model: Category }, { model: UserDetail }],
       });
 
       return res.status(200).json({

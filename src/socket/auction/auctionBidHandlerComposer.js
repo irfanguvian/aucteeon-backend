@@ -56,7 +56,6 @@ function auctionBidHandlerComposer(diHash, params) {
           productId: productId,
         },
         order: [["bidValue", "DESC"]],
-        raw: true,
       });
 
       let highestBid = 0;
