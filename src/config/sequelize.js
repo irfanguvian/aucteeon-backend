@@ -32,8 +32,9 @@ const connectionDB = new Sequelize(db.database, db.username, db.password, {
   pool: {
     max: 100,
     min: 0,
-    acquire: 1200000,
-    idle: 1000000,
+    acquire: 20000, // time require to reconnect
+    idle: 20000, // get idle connection
+    evict: 10000, // it actualy removes the idle connection
   },
 });
 
