@@ -29,7 +29,12 @@ const connectionDB = new Sequelize(db.database, db.username, db.password, {
   database: db.database,
   timezone: db.timezone,
   logging: false,
-  acquire: 60000,
+  pool: {
+    max: 100,
+    min: 0,
+    acquire: 1200000,
+    idle: 1000000,
+  },
 });
 
 module.exports = connectionDB;
