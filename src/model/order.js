@@ -13,7 +13,6 @@ const order = connectionDB.define(
     priceBid: { field: "price_bid", type: DataTypes.INTEGER },
     imageProof: { field: "image_proof", type: DataTypes.JSONB },
     status: { field: "status", type: DataTypes.STRING },
-
   },
   { tableName: "order", timestamps: false },
 );

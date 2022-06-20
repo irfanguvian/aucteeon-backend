@@ -87,7 +87,6 @@ function auctionBidHandlerComposer(diHash, params) {
           productId: productId,
         },
         order: [["bidValue", "DESC"]],
-        raw: true,
       });
 
       await trx.commit();
