@@ -87,6 +87,7 @@ function auctionBidHandlerComposer(diHash, params) {
           productId: productId,
         },
         order: [["bidValue", "DESC"]],
+        include: [{ model: UserDetail }],
       });
 
       await trx.commit();

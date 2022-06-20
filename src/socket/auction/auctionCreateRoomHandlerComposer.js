@@ -3,10 +3,8 @@ async function auctionCreateRoomHandlerComposer(diHash, params) {
   const {
     model,
     lodash,
-    Sequlieze,
   } = diHash;
   async function auctionCreateRoomHandler() {
-    const Op = Sequlieze.Op;
     const {
       Products,
       ProductBid,
@@ -50,31 +48,13 @@ async function auctionCreateRoomHandlerComposer(diHash, params) {
           productId: productId,
         },
         order: [["bidValue", "DESC"]],
-        raw: true,
+        include: [{ model: UserDetail }],
       });
       let highestBid = 0;
       let userBidList = [];
-      let usersIdList = [];
-      let getUserBiddingDetail = [];
       if (!lodash.isEmpty(getBiddingList)) {
         highestBid = getBiddingList[0];
         userBidList = getBiddingList.filter((item) => lodash.isEqual(item.userBidId, userId));
-        usersIdList = getBiddingList.map((item) => item.userBidId);
-      }
-
-      if (!lodash.isEmpty(usersIdList)) {
-        getUserBiddingDetail = await UserDetail.findAll({
-          attributes: ["firstname", "lastname", "avatar"],
-          where: {
-            userId: {
-              [Op.in]: usersIdList,
-            },
-          },
-        });
-        getBiddingList.map((item) => {
-          item.user = getUserBiddingDetail.find((user) => lodash.isEqual(user.userId, item.userBidId));
-          return item;
-        });
       }
 
       return {

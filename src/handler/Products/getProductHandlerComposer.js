@@ -17,9 +17,6 @@ function getProductHandlerComposer(diHash) {
           id: params.id,
         },
         include: [{ model: Category }, { model: User }],
-      }).then((result) => {
-        result.user.password = "";
-        return result;
       });
 
       return res.status(200).json({

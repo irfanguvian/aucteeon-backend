@@ -14,9 +14,6 @@ function getHistoryHandlerComposer(diHash) {
         where: {
           id: params.id,
         },
-      }).then((result) => {
-        result.user.password = "";
-        return result;
       });
 
       return res.status(200).json({

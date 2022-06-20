@@ -16,13 +16,13 @@ Products.belongsTo(Categories, {
   targetKey: "id",
 });
 
-UserModel.hasOne(Products, {
+UserDetail.hasOne(Products, {
   foreignKey: "productOwner",
-  targetKey: "id",
+  targetKey: "userId",
 });
-Products.belongsTo(UserModel, {
+Products.belongsTo(UserDetail, {
   foreignKey: "productOwner",
-  targetKey: "id",
+  targetKey: "userId",
 });
 
 Order.belongsTo(Categories, {
@@ -40,17 +40,17 @@ Order.belongsTo(userDetail, {
   targetKey: "userId",
 });
 
-UserModel.hasOne(Order, {
+UserDetail.hasOne(Order, {
   foreignKey: "userId",
   targetKey: "userId",
 });
 
-History.belongsTo(UserModel, {
+History.belongsTo(UserDetail, {
   foreignKey: "userId",
-  targetKey: "id",
+  targetKey: "userId",
 });
 
-UserModel.hasOne(Order, {
+UserDetail.hasOne(History, {
   foreignKey: "userId",
   targetKey: "userId",
 });
@@ -63,6 +63,16 @@ History.belongsTo(Products, {
 Products.hasOne(History, {
   foreignKey: "productId",
   targetKey: "id",
+});
+
+ProductBid.belongsTo(UserDetail, {
+  foreignKey: "userBidId",
+  targetKey: "userId",
+});
+
+UserDetail.hasOne(ProductBid, {
+  foreignKey: "userBidId",
+  targetKey: "userId",
 });
 
 const ModelComposerHash = {
