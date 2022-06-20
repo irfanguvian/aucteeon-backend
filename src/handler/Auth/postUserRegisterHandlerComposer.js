@@ -6,12 +6,14 @@ function postUserHandlerComposer(diHash) {
     dotenv,
     dayjs,
     jwt,
+    connectionDB,
   } = diHash;
 
   const {
     UserDetail, User,
   } = model;
   async function postUserHandler(req, res) {
+    const trx = await connectionDB.transaction();
     try {
       const body = req.body;
       const checkIfEmailExist = await User.findOne({
@@ -44,12 +46,21 @@ function postUserHandlerComposer(diHash) {
         phoneNumber: body.phoneNumber,
       };
 
-      const getUser = await User.create(insertArgs);
-      const getUserDetail = await UserDetail.create(insertDetail);
+      const getUser = await User.create(insertArgs, {
+        transaction: trx,
+      });
+      insertDetail.userId = getUser.id;
+
+      const getUserDetail = await UserDetail.create(insertDetail, {
+        transaction: trx,
+      });
+
       if (getUser && getUserDetail) {
         const token = jwt.sign(getUser.dataValues, process.env.JWT_SECRET, {
           expiresIn: "30d",
         });
+
+        await trx.commit();
 
         return res.status(200).json({
           success: true,
@@ -60,6 +71,7 @@ function postUserHandlerComposer(diHash) {
           },
         });
       } else {
+        await trx.rollback();
         return res.status(400).json({
           status: false,
           message: "invalid user data",
@@ -67,6 +79,7 @@ function postUserHandlerComposer(diHash) {
         });
       }
     } catch (error) {
+      await trx.rollback();
       console.log(error);
       return res.status(500).json({
         message: error.message,
