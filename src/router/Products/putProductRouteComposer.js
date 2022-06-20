@@ -5,6 +5,13 @@
  *     security:
  *       - userAuthScheme: []
  *       - appAuthScheme: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: id of the product to retrieve.
+ *         required: true
+ *         schema:
+ *           type: integer
  *     description: Updating Product record.
  *     requestBody:
  *       required: true
@@ -39,14 +46,22 @@
  *           description: name of user
  *           type: string
  *         images:
- *           description: name of user
+ *           description: images of product
  *           type: array
+ *           items:
+ *             type: string
  *         categoryId:
  *           description: name of user
  *           type: string
  *         indexImageDeleted:
  *           description: name of user
  *           type: array
+ *         dateStarted:
+ *           description: name of user
+ *           type: string
+ *         dateEnd:
+ *           description: name of user
+ *           type: string
  */
 function postProductRouteComposer(diHash) {
   const {
@@ -58,9 +73,9 @@ function postProductRouteComposer(diHash) {
   const handlerFcomposer = handlerFcomposerHash.putProductHandler;
   const authorization = middlewareComposerHash.userAuthorizationHandler;
 
-  const routerPath = "/products";
+  const routerPath = "/products/:id";
   // expressRouter.use(routerPath, middlewareHash.standardMiddlewareList);
-  expressRouter.post(routerPath, [authorization(diHash)], handlerFcomposer(diHash));
+  expressRouter.put(routerPath, [authorization(diHash)], handlerFcomposer(diHash));
 
   return expressRouter;
 }

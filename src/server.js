@@ -11,6 +11,7 @@ const dotenv = require("dotenv").config();
 const dayjs = require("dayjs");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
+const moment = require("moment");
 
 // internal dependencies
 const routerFcomposer = require("./router");
@@ -40,6 +41,7 @@ const diHash = {
   lodash,
   fs,
   imageUpload,
+  moment,
   Sequlieze,
   model: modelComposerHash,
 };

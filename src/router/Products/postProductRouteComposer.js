@@ -24,25 +24,33 @@
  *       type: object
  *       properties:
  *         name:
- *           description: name of user
+ *           description: name of product
  *           type: string
  *         desc:
- *           description: name of user
+ *           description: desc of product
  *           type: string
  *         condition:
- *           description: name of user
+ *           description: condition of product
  *           type: string
  *         initValue:
- *           description: name of user
+ *           description: initValue of product
  *           type: string
  *         buyNowValue:
- *           description: name of user
+ *           description: buyNowValue of product
  *           type: string
  *         images:
- *           description: name of user
+ *           description: images of product
  *           type: array
+ *           items:
+ *             type: string
  *         categoryId:
- *           description: name of user
+ *           description: categoryId of product
+ *           type: string
+ *         dateStarted:
+ *           description: dateStarted of product
+ *           type: string
+ *         dateEnd:
+ *           description: dateEnd of product
  *           type: string
  *       required:
  *         - name
@@ -51,6 +59,9 @@
  *         - initValue
  *         - buyNowValue
  *         - images
+ *         - dateStarted
+ *         - dateEnd
+ *         - categoryId
  */
 function postProductRouteComposer(diHash) {
   const {

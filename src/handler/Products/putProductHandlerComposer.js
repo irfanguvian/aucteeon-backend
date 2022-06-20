@@ -3,6 +3,7 @@ function postProductHandlerComposer(diHash) {
     model,
     lodash,
     imageUpload,
+    moment,
   } = diHash;
 
   const {
@@ -32,6 +33,8 @@ function postProductHandlerComposer(diHash) {
       if (!lodash.isNil(body.initValue)) currentProduct.initValue = body.initValue;
       if (!lodash.isNil(body.buyNowValue)) currentProduct.buyNowValue = body.buyNowValue;
       if (!lodash.isNil(body.status)) currentProduct.status = body.status;
+      if (!lodash.isNil(body.dateStarted)) currentProduct.dateStarted = moment(body.dateStarted).format("YYYY-MM-DD HH:mm:ss");
+      if (!lodash.isNil(body.dateEnd)) currentProduct.dateEnd = moment(body.dateEnd).format("YYYY-MM-DD HH:mm:ss");
       let newImages = [];
       const images = currentProduct.imageProducts;
 

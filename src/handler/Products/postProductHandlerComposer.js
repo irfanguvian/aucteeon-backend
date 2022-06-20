@@ -3,6 +3,7 @@ function postProductHandlerComposer(diHash) {
     model,
     lodash,
     imageUpload,
+    moment,
   } = diHash;
 
   const {
@@ -21,8 +22,10 @@ function postProductHandlerComposer(diHash) {
         categoryId: "",
         initValue: "",
         buyNowValue: "",
-        productOwner: "", // ambil dari req.user, nunggu dulu
+        productOwner: req.app.auth.userId, // ambil dari req.user, nunggu dulu
         status: "SHOW", // SHOW , DELETED, FINISHED
+        dateStarted: moment().format("YYYY-MM-DD HH:mm:ss"),
+        dateEnd: moment().format("YYYY-MM-DD HH:mm:ss"),
       };
 
       if (!lodash.isNil(body.name)) createProductBody.name = body.name;
@@ -30,6 +33,8 @@ function postProductHandlerComposer(diHash) {
       if (!lodash.isNil(body.condition)) createProductBody.condition = body.condition;
       if (!lodash.isNil(body.initValue)) createProductBody.initValue = body.initValue;
       if (!lodash.isNil(body.buyNowValue)) createProductBody.buyNowValue = body.buyNowValue;
+      if (!lodash.isNil(body.dateStarted)) createProductBody.dateStarted = moment(body.dateStarted).format("YYYY-MM-DD HH:mm:ss");
+      if (!lodash.isNil(body.dateEnd)) createProductBody.dateEnd = moment(body.dateEnd).format("YYYY-MM-DD HH:mm:ss");
 
       if (!lodash.isNil(body.images)) {
         const responseImage = await Promise.all(body.images.map(async (image, index) => {
