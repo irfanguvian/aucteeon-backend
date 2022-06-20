@@ -1,18 +1,11 @@
 /**
  * @openapi
- * /user/{id}:
+ * /user:
  *  get:
  *     security:
  *       - userAuthScheme: []
  *       - appAuthScheme: []
  *     description: example Retrieve a record.
- *     parameters:
- *       - in: path
- *         name: id
- *         description: id of the user to retrieve.
- *         required: true
- *         schema:
- *           type: string
  *     responses:
  *       200:
  *         description: Retrieved record.
@@ -23,14 +16,17 @@ function getUserDetailRouterFComposer(diHash) {
   const {
     express,
     handlerFcomposerHash,
+    middlewareComposerHash,
   } = diHash;
   const expressRouter = express.Router();
   const handlerFcomposer = handlerFcomposerHash.getUserDetailHandler;
+  const authorization = middlewareComposerHash.userAuthorizationHandler;
 
-  const routerPath = "/user/:id";
+  const routerPath = "/user";
   //   expressRouter.use(routerPath, middlewareHash);
   expressRouter.get(
     routerPath,
+    [authorization(diHash)],
     handlerFcomposer(diHash),
   );
   return expressRouter;

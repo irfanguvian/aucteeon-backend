@@ -5,11 +5,10 @@ function getUserDetailHandlerFcomposer(diHash) {
 
   const { UserDetail } = model;
   async function getUserDetailHandler(req, res) {
-    const { id } = req.params;
     try {
       const getUserDetail = await UserDetail.findOne({
         where: {
-          userId: id,
+          userId: req.app.auth.userId,
         },
         raw: true,
       });
