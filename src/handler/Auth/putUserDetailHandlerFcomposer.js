@@ -28,7 +28,7 @@ function putUserDetailHandlerFcomposer(diHash) {
 
       const updateProduct = await UserDetail.update(updateProductBody, {
         where: {
-          userId: body.id,
+          userId: req.app.auth.userId,
         },
       });
 

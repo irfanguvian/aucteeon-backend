@@ -48,19 +48,23 @@
  *         - avatar
  *         - address
  *         - phoneNumber
- *         - sex
  */
 function putUserDetailRouterFComposer(diHash) {
   const {
     express,
     handlerFcomposerHash,
+    middlewareComposerHash,
   } = diHash;
   const expressRouter = express.Router();
   const handlerFcomposer = handlerFcomposerHash.putUserDetailHandler;
-
+  const authorization = middlewareComposerHash.userAuthorizationHandler;
   const routerPath = "/user";
   // expressRouter.use(routerPath, middlewareHash.standardMiddlewareList);
-  expressRouter.put(routerPath, handlerFcomposer(diHash));
+  expressRouter.put(
+    routerPath,
+    [authorization(diHash)],
+    handlerFcomposer(diHash),
+  );
 
   return expressRouter;
 }
