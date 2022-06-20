@@ -81,6 +81,8 @@ function auctionBidHandlerComposer(diHash, params) {
       getProduct.closeFor = userId;
       await getProduct.save({ transaction: trx });
 
+      await trx.commit();
+
       const refetchProductBid = await ProductBid.findAll({
         where: {
           productId: productId,
@@ -88,8 +90,6 @@ function auctionBidHandlerComposer(diHash, params) {
         order: [["bidValue", "DESC"]],
         include: [{ model: UserDetail }],
       });
-
-      await trx.commit();
 
       return {
         success: true,
