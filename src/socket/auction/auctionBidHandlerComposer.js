@@ -82,6 +82,14 @@ function auctionBidHandlerComposer(diHash, params) {
       getProduct.closeFor = userId;
       await getProduct.save({ transaction: trx });
 
+      const refetchProductBid = await ProductBid.findAll({
+        where: {
+          productId: productId,
+        },
+        order: [["bidValue", "DESC"]],
+        raw: true,
+      });
+
       await trx.commit();
 
       return {
@@ -91,6 +99,7 @@ function auctionBidHandlerComposer(diHash, params) {
           user: userDetail,
           room: auctionRoom,
           highestBid: highestBid,
+          list: refetchProductBid,
         },
       };
 
