@@ -32,11 +32,13 @@ function getHistoryListHandlerComposer(diHash) {
       offset = (pages - 1) * limit;
       // check log TODO
       const OrderList = await Order.findAndCountAll({
+        where: {
+          userId: req.app.auth.userId,
+        },
         order: [["id", "DESC"]],
         limit,
         offset,
       });
-
       const fromMeta = OrderList.rows.length > 0 ? offset + 1 : 0;
       const toMeta = OrderList.rows.length > 0 ? offset + OrderList.rows.length : 0;
 

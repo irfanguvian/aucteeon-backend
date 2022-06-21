@@ -12,30 +12,33 @@ function putOrderHandlerComposer(diHash) {
     try {
       const params = req.params;
       const body = req.body;
-
+      let status = false;
       const getOrder = await Order.findOne({
         where: {
           id: params.id,
+          userId: req.app.auth.userId,
         },
       });
 
-      if (!lodash.isNil(body.status)) {
-        if (!lodash.isEmpty(body.status)) {
-          getOrder.status = body.status;
+      if (!lodash.isNil(getOrder)) {
+        if (!lodash.isNil(body.status)) {
+          if (!lodash.isEmpty(body.status)) {
+            getOrder.status = body.status;
+          }
         }
-      }
 
-      if (!lodash.isNil(body.imageProof)) {
-        if (!lodash.isEmpty(body.imageProof)) {
-          const image = await imageUpload(body.imageProof, 0, "proof");
-          getOrder.imageProof = image;
+        if (!lodash.isNil(body.imageProof)) {
+          if (!lodash.isEmpty(body.imageProof)) {
+            const image = await imageUpload(body.imageProof, 0, "proof");
+            getOrder.imageProof = image;
+          }
         }
+        await getOrder.save();
+        status = true;
       }
-
-      await getOrder.save();
 
       return res.status(200).json({
-        "success": true,
+        "success": status,
         "data": getOrder,
       });
     } catch (error) {

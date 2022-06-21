@@ -15,6 +15,8 @@ function getHistoryHandlerComposer(diHash) {
       const getHistory = await History.findOne({
         where: {
           id: params.id,
+          userId: req.app.auth.userId,
+
         },
         include: [{ model: UserDetail }, { model: Products }],
       });
