@@ -11,8 +11,7 @@ const dotenv = require("dotenv").config();
 const dayjs = require("dayjs");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
-const moment = require("moment");
-const momentDurationFormatSetup = require("moment-duration-format");
+const moment = require("moment-timezone");
 
 // internal dependencies
 const routerFcomposer = require("./router");
@@ -24,7 +23,6 @@ const imageUpload = require("./utils/imageUploads");
 const middlewareComposerHash = require("./middleware");
 
 const app = express();
-momentDurationFormatSetup(moment);
 
 const diHash = {
   bcrypt,

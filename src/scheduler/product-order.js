@@ -5,7 +5,7 @@ async function ExpiredProductHandlerComposer(diHash) {
   const {
     connectionDB,
     model,
-    dayjs,
+    moment,
     Sequlieze,
     lodash,
   } = diHash;
@@ -19,11 +19,11 @@ async function ExpiredProductHandlerComposer(diHash) {
     const trx = await connectionDB.transaction();
 
     try {
-      const dayNow = dayjs().format("YYYY-MM-DD HH:mm:ss");
+      const dayNow = moment().tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
 
       const products = await Products.findAll({
         where: {
-          status: "OPEN",
+          status: "SHOW",
           dateEnd: {
             [Sequlieze.Op.lte]: dayNow,
           },

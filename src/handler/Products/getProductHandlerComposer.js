@@ -13,12 +13,13 @@ function getProductHandlerComposer(diHash) {
   async function getProductHandler(req, res) {
     try {
       const params = req.params;
-
+      const dayNow = moment().tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
+      console.log(dayNow);
       const Product = await Products.findOne({
         where: {
           id: params.id,
           dateEnd: {
-            [Sequlieze.Op.lte]: moment().format("YYYY-MM-DD HH:mm:ss"),
+            [Sequlieze.Op.gte]: dayNow,
           },
           status: {
             [Sequlieze.Op.not]: "CLOSE",
