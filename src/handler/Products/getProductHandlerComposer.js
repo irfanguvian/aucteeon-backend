@@ -14,7 +14,6 @@ function getProductHandlerComposer(diHash) {
     try {
       const params = req.params;
       const dayNow = moment().tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
-      console.log(dayNow);
       const Product = await Products.findOne({
         where: {
           id: params.id,

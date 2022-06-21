@@ -42,7 +42,7 @@ function getHistoryListHandlerComposer(diHash) {
         order: [["id", "DESC"]],
         limit,
         offset,
-        include: [{ model: UserDetail }, { model: Products, include: [{ model: UserDetail }] }],
+        include: [{ model: UserDetail }, { model: Products }],
       });
 
       await Promise.all(HistoryList.rows.map((async (item) => {
