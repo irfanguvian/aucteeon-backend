@@ -16,7 +16,6 @@ function getHistoryHandlerComposer(diHash) {
         where: {
           id: params.id,
           userId: req.app.auth.userId,
-          productId: params.productId,
         },
         include: [{ model: UserDetail }, { model: Products }],
       });
