@@ -65,7 +65,7 @@ function getHistoryListHandlerComposer(diHash) {
         });
 
         if (!lodash.isNull(priceBidLatest)) {
-          item.priceBidLatest = priceBidLatest.bidValue;
+          item.product.priceBidLatest = priceBidLatest.bidValue;
         }
 
         if (!lodash.isNil(item.orderId)) {
@@ -77,7 +77,7 @@ function getHistoryListHandlerComposer(diHash) {
           });
 
           if (!lodash.isNull(getOrder)) {
-            item.orderNumber = getOrder.orderNumber;
+            item.product.orderNumber = getOrder.orderNumber;
           }
         }
 
