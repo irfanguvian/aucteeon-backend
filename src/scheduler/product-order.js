@@ -35,19 +35,6 @@ async function ExpiredProductHandlerComposer(diHash) {
           if (!lodash.isNil(product)) {
             const userWinnerId = product.closeFor;
 
-            const historyWinArgs = {
-              productId: product?.id,
-              userId: userWinnerId,
-              status: "WIN",
-            };
-
-            await History.update(historyWinArgs, {
-              where: {
-                productId: product?.id,
-                userId: userWinnerId,
-              },
-            }, { transaction: trx });
-
             const getLoseUserId = await ProductBid.findAll({
               attributes: ["userBidId"],
               where: {
@@ -103,7 +90,20 @@ async function ExpiredProductHandlerComposer(diHash) {
                 imageProof: [],
                 status: "NOT_PAID", // NOT_PAID, DRAFT, CANCEL,PAID
               };
-              await Order.create(createOrderArgs, { transaction: trx });
+              const orderCreate = await Order.create(createOrderArgs, { transaction: trx });
+
+              const historyWinArgs = {
+                productId: product?.id,
+                userId: userWinnerId,
+                status: "WIN",
+                orderId: orderCreate?.id,
+              };
+              await History.update(historyWinArgs, {
+                where: {
+                  productId: product?.id,
+                  userId: userWinnerId,
+                },
+              }, { transaction: trx });
             }
 
             product.status = "CLOSE";
