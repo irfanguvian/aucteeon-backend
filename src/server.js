@@ -12,7 +12,8 @@ const dayjs = require("dayjs");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
-
+const momentDurationFormatSetup = require("moment-duration-format");
+const indonesia = require("moment/locale/id");
 // internal dependencies
 const routerFcomposer = require("./router");
 const handlerFcomposerHash = require("./handler");
@@ -21,11 +22,14 @@ const connectionDB = require("./config/sequelize");
 const modelComposerHash = require("./model");
 const imageUpload = require("./utils/imageUploads");
 const middlewareComposerHash = require("./middleware");
-// app registration
-// const env = {
-//   APP_ENV: process.env.APP_ENV,
-//   APP_VERSION: process.env.APP_VERSION,
-// };
+
+momentDurationFormatSetup(moment);
+moment.locale("id", indonesia);
+// eslint-disable-next-line no-unused-expressions
+typeof moment.duration.fn.format === "function";
+// eslint-disable-next-line no-unused-expressions
+typeof moment.duration.format === "function";
+
 const app = express();
 
 const diHash = {
