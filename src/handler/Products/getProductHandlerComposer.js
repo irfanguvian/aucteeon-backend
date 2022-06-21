@@ -1,6 +1,8 @@
 function getProductHandlerComposer(diHash) {
   const {
     model,
+    Op,
+    moment,
   } = diHash;
 
   const {
@@ -15,6 +17,12 @@ function getProductHandlerComposer(diHash) {
       const Product = await Products.findOne({
         where: {
           id: params.id,
+          dateEnd: {
+            [Op.lte]: moment().format("YYYY-MM-DD HH:mm:ss"),
+          },
+          status: {
+            [Op.not]: "CLOSE",
+          },
         },
         include: [{ model: Category }, { model: UserDetail }],
       });

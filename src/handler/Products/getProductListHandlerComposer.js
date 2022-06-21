@@ -1,7 +1,11 @@
 function getProductListHandlerComposer(diHash) {
   const {
     model,
+    moment,
+    Sequlieze,
   } = diHash;
+
+  const { Op } = Sequlieze;
 
   const {
     Products,
@@ -32,6 +36,14 @@ function getProductListHandlerComposer(diHash) {
       offset = (pages - 1) * limit;
       // check log TODO
       const ProductsList = await Products.findAndCountAll({
+        where: {
+          dateEnd: {
+            [Op.gte]: moment().format("YYYY-MM-DD HH:mm:ss"),
+          },
+          status: {
+            [Op.not]: "CLOSE",
+          },
+        },
         order: [["id", "DESC"]],
         limit,
         offset,
