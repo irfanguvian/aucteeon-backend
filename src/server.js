@@ -13,7 +13,7 @@ const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 const momentDurationFormatSetup = require("moment-duration-format");
-const indonesia = require("moment/locale/id");
+
 // internal dependencies
 const routerFcomposer = require("./router");
 const handlerFcomposerHash = require("./handler");
@@ -23,14 +23,8 @@ const modelComposerHash = require("./model");
 const imageUpload = require("./utils/imageUploads");
 const middlewareComposerHash = require("./middleware");
 
-momentDurationFormatSetup(moment);
-moment.locale("id", indonesia);
-// eslint-disable-next-line no-unused-expressions
-typeof moment.duration.fn.format === "function";
-// eslint-disable-next-line no-unused-expressions
-typeof moment.duration.format === "function";
-
 const app = express();
+momentDurationFormatSetup(moment);
 
 const diHash = {
   bcrypt,

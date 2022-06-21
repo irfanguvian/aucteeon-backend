@@ -1,7 +1,7 @@
 function getProductHandlerComposer(diHash) {
   const {
     model,
-    Op,
+    Sequlieze,
     moment,
   } = diHash;
 
@@ -18,10 +18,10 @@ function getProductHandlerComposer(diHash) {
         where: {
           id: params.id,
           dateEnd: {
-            [Op.lte]: moment().format("YYYY-MM-DD HH:mm:ss"),
+            [Sequlieze.Op.lte]: moment().format("YYYY-MM-DD HH:mm:ss"),
           },
           status: {
-            [Op.not]: "CLOSE",
+            [Sequlieze.Op.not]: "CLOSE",
           },
         },
         include: [{ model: Category }, { model: UserDetail }],

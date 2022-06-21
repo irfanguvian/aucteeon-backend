@@ -35,10 +35,11 @@ function getProductListHandlerComposer(diHash) {
 
       offset = (pages - 1) * limit;
       // check log TODO
+      const dayNow = moment().format("YYYY-MM-DD HH:mm:ss");
       const ProductsList = await Products.findAndCountAll({
         where: {
           dateEnd: {
-            [Op.gte]: moment().format("YYYY-MM-DD HH:mm:ss"),
+            [Op.gte]: dayNow,
           },
           status: {
             [Op.not]: "CLOSE",
