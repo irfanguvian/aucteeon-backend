@@ -5,6 +5,8 @@ function getHistoryListHandlerComposer(diHash) {
 
   const {
     History,
+    UserDetail,
+    Products,
   } = model;
   async function getHistoryListHandler(req, res) {
     try {
@@ -34,6 +36,7 @@ function getHistoryListHandlerComposer(diHash) {
         order: [["id", "DESC"]],
         limit,
         offset,
+        include: [{ model: UserDetail }, { model: Products }],
       });
 
       const fromMeta = HistoryList.rows.length > 0 ? offset + 1 : 0;

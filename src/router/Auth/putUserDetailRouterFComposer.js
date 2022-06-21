@@ -2,6 +2,9 @@
  * @openapi
  * /user:
  *  put:
+ *     security:
+ *       - userAuthScheme: []
+ *       - appAuthScheme: []
  *     description: Update New User
  *     requestBody:
  *       required: true

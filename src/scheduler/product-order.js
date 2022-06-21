@@ -41,7 +41,12 @@ async function ExpiredProductHandlerComposer(diHash) {
               status: "WIN",
             };
 
-            await History.create(historyWinArgs, { transaction: trx });
+            await History.update(historyWinArgs, {
+              where: {
+                productId: product?.id,
+                userId: userWinnerId,
+              },
+            }, { transaction: trx });
 
             const getLoseUserId = await ProductBid.findAll({
               attributes: ["userBidId"],
@@ -52,17 +57,21 @@ async function ExpiredProductHandlerComposer(diHash) {
                 },
               },
               group: ["userBidId"],
-              raw: true,
             });
 
             await Promise.all(getLoseUserId.map(async (user) => {
               if (!lodash.isNil(user)) {
                 const historyLoseArgs = {
                   productId: product?.id,
-                  userId: user?.userBidId,
-                  status: "LOSE",
+                  userId: user?.userBidId || 0,
+                  status: "LOSE", // ONGOING,WIN,LOSE
                 };
-                return History.create(historyLoseArgs, { transaction: trx });
+                return History.update(historyLoseArgs, {
+                  where: {
+                    productId: product?.id,
+                    userId: user?.userBidId || 0,
+                  },
+                }, { transaction: trx });
               } else {
                 return null;
               }
@@ -74,26 +83,25 @@ async function ExpiredProductHandlerComposer(diHash) {
                 userBidId: userWinnerId,
               },
               order: [["bidValue", "DESC"]],
-              raw: true,
             });
 
             if (!lodash.isNil(getWinnerBidValue)) {
-              let orderNumber = ``;
+              let orderNumber = `INV/`;
               for (let i = 0; i < 3; i += 1) {
                 const generateCode = cryptos.randomBytes(2).toString("hex");
                 if (i === 2) {
                   orderNumber += `${generateCode}`;
                 } else {
-                  orderNumber += `${generateCode}-`;
+                  orderNumber += `${generateCode}/`;
                 }
               }
               const createOrderArgs = {
                 productId: product.id,
                 orderNumber: orderNumber,
                 userId: userWinnerId,
-                priceBid: getWinnerBidValue.bidValue,
+                priceBid: getWinnerBidValue?.bidValue,
                 imageProof: [],
-                status: "NOT_PAID",
+                status: "NOT_PAID", // NOT_PAID, DRAFT, CANCEL,PAID
               };
               await Order.create(createOrderArgs, { transaction: trx });
             }

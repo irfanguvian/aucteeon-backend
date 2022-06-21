@@ -9,6 +9,7 @@ function auctionBidHandlerComposer(diHash, params) {
     UserDetail,
     Products,
     ProductBid,
+    History,
   } = model;
   async function auctionBidHandler() {
     try {
@@ -71,7 +72,24 @@ function auctionBidHandlerComposer(diHash, params) {
         bidValue: bidValue,
       };
 
+      const historyArgs = {
+        productId: productId,
+        userId: userId,
+        status: "ONGOING",
+      };
+
       const bid = await ProductBid.create(bidArgs, { transaction: trx });
+
+      const checkHistory = await History.findOne({
+        where: {
+          productId: productId,
+          userId: userId,
+        },
+      });
+
+      if (lodash.isNil(checkHistory)) {
+        await History.create(historyArgs, { transaction: trx });
+      }
 
       if (lodash.isNil(bid)) {
         await trx.rollback();

@@ -5,6 +5,8 @@ function getHistoryHandlerComposer(diHash) {
 
   const {
     Order,
+    UserDetail,
+    Products,
   } = model;
   async function getHistoryHandler(req, res) {
     try {
@@ -14,6 +16,7 @@ function getHistoryHandlerComposer(diHash) {
         where: {
           id: params.id,
         },
+        include: [{ model: UserDetail }, { model: Products }],
       });
 
       return res.status(200).json({

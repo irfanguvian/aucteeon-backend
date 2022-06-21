@@ -75,6 +75,26 @@ UserDetail.hasOne(ProductBid, {
   targetKey: "userId",
 });
 
+Order.belongsTo(UserDetail, {
+  foreignKey: "userId",
+  targetKey: "userId",
+});
+
+UserDetail.hasOne(Order, {
+  foreignKey: "userId",
+  targetKey: "userId",
+});
+
+Order.belongsTo(Products, {
+  foreignKey: "productId",
+  targetKey: "id",
+});
+
+Products.hasOne(Order, {
+  foreignKey: "productId",
+  targetKey: "id",
+});
+
 const ModelComposerHash = {
   User: UserModel,
   UserDetail,
