@@ -32,8 +32,8 @@
  *         lastname:
  *           description: lastname of user
  *           type: string
- *         avatar:
- *           description: avatar of user
+ *         newAvatar:
+ *           description: newAvatar of user
  *           type: string
  *         address:
  *           description: address of user
@@ -48,7 +48,7 @@
  *         - id
  *         - firstname
  *         - lastname
- *         - avatar
+ *         - newAvatar
  *         - address
  *         - phoneNumber
  */

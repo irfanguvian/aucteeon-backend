@@ -16,9 +16,9 @@ function putUserDetailHandlerFcomposer(diHash) {
 
       if (!lodash.isNil(body.firstname)) updateProductBody.firstname = body.firstname;
       if (!lodash.isNil(body.lastname)) updateProductBody.lastname = body.lastname;
-      if (!lodash.isNil(body.avatar)) {
-        if (!lodash.isEmpty(body.avatar)) {
-          const avatar = await imageUpload(body.avatar);
+      if (!lodash.isNil(body.newAvatar)) {
+        if (!lodash.isEmpty(body.newAvatar)) {
+          const avatar = await imageUpload(body.newAvatar);
           updateProductBody.avatar = avatar;
         }
       }
