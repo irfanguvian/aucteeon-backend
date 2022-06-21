@@ -1,6 +1,7 @@
 function getHistoryHandlerComposer(diHash) {
   const {
     model,
+    lodash,
   } = diHash;
 
   const {
@@ -19,6 +20,17 @@ function getHistoryHandlerComposer(diHash) {
         },
         include: [{ model: UserDetail }, { model: Products }],
       });
+
+      const getUser = await UserDetail.findOne({
+        attributes: ["firstname", "lastname"],
+        where: {
+          userId: getOrder?.product?.productOwner || 0,
+        },
+      });
+
+      if (!lodash.isNull(getUser)) {
+        getOrder.product.productOwner = getUser;
+      }
 
       return res.status(200).json({
         "success": true,
