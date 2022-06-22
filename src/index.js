@@ -12,10 +12,10 @@ const io = require("socket.io")(server, {
       cb(null, true);
     },
     methods: ["GET", "POST"],
-    transports: ["websocket"],
-    credentials: true,
+    // transports: ["websocket"],
+    // credentials: true,
   },
-  path: "/api/socket.io",
+  // path: "/api/socket.io",
   allowEIO3: true,
   allowRequest: (req, callback) => {
     const noOriginHeader = req.headers.origin === undefined;
