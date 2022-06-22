@@ -15,11 +15,12 @@ const io = require("socket.io")(server, {
     transports: ["websocket"],
     credentials: true,
   },
+  rejectUnauthorized: false,
   allowEIO3: true,
-  allowRequest: (req, callback) => {
-    const noOriginHeader = req.headers.origin === undefined;
-    callback(null, noOriginHeader);
-  },
+  // allowRequest: (req, callback) => {
+  //   const noOriginHeader = req.headers.origin === undefined;
+  //   callback(null, noOriginHeader);
+  // },
 });
 
 diHash.io = io;
