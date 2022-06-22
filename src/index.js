@@ -23,6 +23,11 @@ const io = require("socket.io")(server, {
   },
 });
 
+io.origins([
+  "https://aucteeon.xyz/api",
+  "https://aucteeon.netlify.app:443",
+]);
+
 diHash.io = io;
 socketHandler(diHash);
 // io.on("connection", (socket) => {
