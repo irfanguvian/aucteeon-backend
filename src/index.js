@@ -24,7 +24,7 @@ const io = require("socket.io")(server, {
 });
 
 io.origins([
-  "https://aucteeon.xyz/api",
+  "http://localhost:8080",
   "https://aucteeon.netlify.app:443",
 ]);
 
