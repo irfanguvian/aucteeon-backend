@@ -17,10 +17,6 @@ const io = require("socket.io")(server, {
   },
   rejectUnauthorized: false,
   allowEIO3: true,
-  allowRequest: (req, callback) => {
-    const noOriginHeader = req.headers.origin === undefined;
-    callback(null, noOriginHeader);
-  },
 });
 
 diHash.io = io;
