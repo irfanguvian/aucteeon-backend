@@ -15,7 +15,7 @@ const io = require("socket.io")(server, {
     transports: ["websocket"],
     credentials: true,
   },
-  patj: "/api",
+  path: "/api/socket.io",
   allowEIO3: true,
   allowRequest: (req, callback) => {
     const noOriginHeader = req.headers.origin === undefined;
