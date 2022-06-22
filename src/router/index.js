@@ -1,5 +1,4 @@
 // import goes here
-const exampleRouteFcomposer = require("./exampleRoute");
 const AuthRouteFcomposer = require("./Auth");
 const ProductsRouteFcomposer = require("./Products");
 const OrderRouteFcomposer = require("./Order");
@@ -28,9 +27,6 @@ function routerFcomposer(diHash) {
 
   const expressRouter = express.Router();
 
-  // example
-  const exampleRoute = exampleRouteFcomposer(diHash);
-  expressRouter.use(exampleRoute);
   const AuthRoute = AuthRouteFcomposer(diHash);
   expressRouter.use(AuthRoute);
   const ProductRoute = ProductsRouteFcomposer(diHash);

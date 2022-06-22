@@ -61,7 +61,7 @@ const swaggerJsdocOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "str-backend",
+      title: "aucteen-backend-document",
       version,
       // version: env.APP_VERSION,
     },
