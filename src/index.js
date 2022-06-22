@@ -16,6 +16,10 @@ const io = require("socket.io")(server, {
     credentials: true,
   },
   allowEIO3: true,
+  allowRequest: (req, callback) => {
+    const noOriginHeader = req.headers.origin === undefined;
+    callback(null, noOriginHeader);
+  },
 });
 
 diHash.io = io;
