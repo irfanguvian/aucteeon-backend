@@ -61,6 +61,7 @@ function getHistoryListHandlerComposer(diHash) {
           attributes: ["bidValue"],
           where: {
             userBidId: item.userId,
+            productId: item.productId,
           },
           order: [["bidValue", "DESC"]],
         });
