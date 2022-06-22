@@ -6,7 +6,7 @@ async function AuctionSocket(diHash) {
   const {
     io,
   } = diHash;
-  io.on("connection", (async (socket) => {
+  io.of("/api").on("connection", (async (socket) => {
     socket.on("auction-join", async (params) => {
       const result = await auctionCreateRoomHandler(diHash, { ...params, socketId: socket.id });
       if (result.success) {
