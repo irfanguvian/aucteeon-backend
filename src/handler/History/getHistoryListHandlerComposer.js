@@ -46,6 +46,7 @@ function getHistoryListHandlerComposer(diHash) {
       });
 
       await Promise.all(HistoryList.rows.map((async (item) => {
+
         const getUser = await UserDetail.findOne({
           attributes: ["firstname", "lastname"],
           where: {
@@ -65,7 +66,7 @@ function getHistoryListHandlerComposer(diHash) {
         });
 
         if (!lodash.isNull(priceBidLatest)) {
-          item.product.priceBidLatest = priceBidLatest.bidValue;
+          item.dataValues.priceBidLatest = priceBidLatest.bidValue;
         }
 
         if (!lodash.isNil(item.orderId)) {
@@ -77,7 +78,7 @@ function getHistoryListHandlerComposer(diHash) {
           });
 
           if (!lodash.isNull(getOrder)) {
-            item.product.orderNumber = getOrder.orderNumber;
+            item.dataValues.orderNumber = getOrder.orderNumber;
           }
         }
 

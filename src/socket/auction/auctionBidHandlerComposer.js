@@ -4,6 +4,8 @@ function auctionBidHandlerComposer(diHash, params) {
     lodash,
     dayjs,
     connectionDB,
+    Sequlieze,
+    moment,
   } = diHash;
   const {
     UserDetail,
@@ -33,10 +35,13 @@ function auctionBidHandlerComposer(diHash, params) {
       });
 
       if (lodash.isNil(userDetail)) throw new Error("User not found");
-
+      const daynow = moment().tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
       const getProduct = await Products.findOne({
         where: {
           id: productId,
+          dateEnd: {
+            [Sequlieze.Op.gte]: daynow,
+          },
         },
       });
 

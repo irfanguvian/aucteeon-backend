@@ -2,6 +2,7 @@ const getProductRouteComposer = require("./getProductRouteComposer");
 const getProductsListRouteComposer = require("./getProductsListRouteComposer");
 const postProductRouteComposer = require("./postProductRouteComposer");
 const putProductRouteComposer = require("./putProductRouteComposer");
+const getProductsHotTodayRouteComposer = require("./getProductsHotTodayRouteComposer");
 
 function productsRouterFcomposer(diHash) {
   const {
@@ -12,6 +13,7 @@ function productsRouterFcomposer(diHash) {
 
   expressRouter.use(postProductRouteComposer(diHash));
   expressRouter.use(putProductRouteComposer(diHash));
+  expressRouter.use(getProductsHotTodayRouteComposer(diHash));
   expressRouter.use(getProductRouteComposer(diHash));
   expressRouter.use(getProductsListRouteComposer(diHash));
 
