@@ -12,21 +12,15 @@ const io = require("socket.io")(server, {
       cb(null, true);
     },
     methods: ["GET", "POST"],
-    // transports: ["websocket"],
-    // credentials: true,
+    transports: ["websocket"],
+    credentials: true,
   },
-  // path: "/api/socket.io",
-  allowEIO3: true,
+  // allowEIO3: true,
   allowRequest: (req, callback) => {
     const noOriginHeader = req.headers.origin === undefined;
     callback(null, noOriginHeader);
   },
 });
-
-io.origins([
-  "http://localhost:8080",
-  "https://aucteeon.netlify.app:443",
-]);
 
 diHash.io = io;
 socketHandler(diHash);
