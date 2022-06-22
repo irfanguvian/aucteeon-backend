@@ -12,7 +12,7 @@ const io = require("socket.io")(server, {
       cb(null, true);
     },
     methods: ["GET", "POST"],
-    transports: ["websocket"],
+    transports: ["websocket", "polling"],
     credentials: true,
   },
   rejectUnauthorized: false,
